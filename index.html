@@ -273,7 +273,8 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 
 /* Horizontal scroll */
 .portfolio-scroll{position:relative;width:100%}
-.portfolio-track{display:flex;gap:20px;overflow-x:auto;padding:10px 48px 20px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--primary-30) transparent}
+.portfolio-track{display:flex;gap:20px;overflow-x:auto;padding:10px 48px 20px;scroll-behavior:auto;scrollbar-width:thin;scrollbar-color:var(--primary-30) transparent;cursor:grab}
+.portfolio-track:active{cursor:grabbing}
 .portfolio-track::-webkit-scrollbar{height:6px}
 .portfolio-track::-webkit-scrollbar-track{background:transparent}
 .portfolio-track::-webkit-scrollbar-thumb{background:var(--primary-30);border-radius:3px}
@@ -1003,21 +1004,24 @@ let wheelTimeout;
 // 水平滚动惯性优化
 let horizontalScrollVelocity = 0;
 let horizontalScrollRAF = null;
+let lastWheelTime = 0;
 document.addEventListener('wheel', (e)=>{
   if (isScrolling) return;
   // 作品区域：垂直滚轮转为水平滑动（优化灵敏度和流畅度）
   const track = e.target.closest('.portfolio-track');
   if (track) {
     e.preventDefault();
-    // 速度系数 1.4，让滚动更跟手；deltaMode 为行时放大
-    const delta = e.deltaY * (e.deltaMode === 1 ? 16 : 1) * 1.4;
+    // 高灵敏度：速度系数2.2，触摸板行模式放大20倍
+    const delta = e.deltaY * (e.deltaMode === 1 ? 20 : 1) * 2.2;
     track.scrollLeft += delta;
     // 惯性滚动：累积速度，用 requestAnimationFrame 平滑衰减
-    horizontalScrollVelocity += delta * 0.3;
+    horizontalScrollVelocity += delta * 0.55;
+    // 限制最大惯性速度，避免飞太快
+    horizontalScrollVelocity = Math.max(-80, Math.min(80, horizontalScrollVelocity));
     if (!horizontalScrollRAF) {
       const inertiaScroll = () => {
-        horizontalScrollVelocity *= 0.92; // 衰减系数
-        if (Math.abs(horizontalScrollVelocity) > 0.5) {
+        horizontalScrollVelocity *= 0.945;
+        if (Math.abs(horizontalScrollVelocity) > 0.15) {
           track.scrollLeft += horizontalScrollVelocity;
           horizontalScrollRAF = requestAnimationFrame(inertiaScroll);
         } else {
