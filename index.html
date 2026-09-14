@@ -63,7 +63,7 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 /* ========== Common ========== */
 .container{max-width:1680px;margin:0 auto;padding:0 48px}
 @media(max-width:768px){.container{padding:0 20px}}
-.section-title{text-align:center;margin-bottom:48px}
+.section-title{text-align:center;margin-bottom:32px}
 .section-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--primary-10);border:1px solid var(--primary-20);font-size:13px;font-weight:500;color:var(--primary);margin-bottom:16px}
 .section-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -122,17 +122,17 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 @keyframes rotate-reverse{to{transform:rotate(-360deg)}}
 .seal-center div{width:48px;height:48px;border-radius:50%;background:var(--primary-10);border:1px solid var(--primary-25);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;font-style:italic;color:var(--primary);backdrop-filter:blur(4px)}
 
-/* Hero content */
-.hero-content{position:relative;z-index:20;max-width:1024px;margin-left:6%}
-.hero-label{font-size:clamp(12px,1.5vw,16px);font-weight:600;letter-spacing:.45em;color:var(--primary);text-transform:uppercase;margin-bottom:32px}
-.hero-title{font-weight:900;letter-spacing:-.02em;line-height:1.02;font-size:clamp(48px,10vw,160px);margin-bottom:24px}
-.hero-title span{display:block;background:linear-gradient(135deg,var(--fg) 0%, var(--fg) 60%, var(--primary-70) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-subtitle{font-size:clamp(16px,2vw,24px);font-weight:500;letter-spacing:.05em;color:rgba(255,255,255,.6);margin-bottom:48px}
+/* Hero content - 修改1: 标题放在一行 */
+.hero-content{position:relative;z-index:20;max-width:1200px;margin:0 auto;text-align:center}
+.hero-label{font-size:clamp(12px,1.5vw,16px);font-weight:600;letter-spacing:.45em;color:var(--primary);text-transform:uppercase;margin-bottom:24px}
+.hero-title{font-weight:900;letter-spacing:-.02em;line-height:1.1;font-size:clamp(40px,8vw,120px);margin-bottom:20px;white-space:nowrap}
+.hero-title span{background:linear-gradient(135deg,var(--fg) 0%, var(--fg) 60%, var(--primary-70) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-subtitle{font-size:clamp(14px,1.8vw,22px);font-weight:500;letter-spacing:.05em;color:rgba(255,255,255,.6);margin-bottom:40px}
 .hero-subtitle .sep{margin:0 12px;color:var(--primary-50)}
-.hero-buttons{display:flex;gap:20px;flex-wrap:wrap}
-.btn-primary{height:64px;padding:0 40px;border-radius:12px;background:var(--primary);color:var(--primary-fg);font-size:clamp(14px,1.5vw,18px);font-weight:600;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.2),0 0 20px var(--primary-25);transition:all .2s}
+.hero-buttons{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.btn-primary{height:60px;padding:0 36px;border-radius:12px;background:var(--primary);color:var(--primary-fg);font-size:clamp(14px,1.5vw,18px);font-weight:600;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.2),0 0 20px var(--primary-25);transition:all .2s}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.25),0 0 30px var(--primary-35)}
-.btn-outline{height:64px;padding:0 40px;border-radius:12px;border:1px solid rgba(255,255,255,.2);color:var(--fg);font-size:clamp(14px,1.5vw,18px);font-weight:600;transition:all .2s}
+.btn-outline{height:60px;padding:0 36px;border-radius:12px;border:1px solid rgba(255,255,255,.2);color:var(--fg);font-size:clamp(14px,1.5vw,18px);font-weight:600;transition:all .2s}
 .btn-outline:hover{border-color:var(--primary-50);background:var(--primary-10);color:var(--primary)}
 
 /* Bottom info */
@@ -153,55 +153,59 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 /* ===================================================== */
 /* ================ SECTION 2: ABOUT =================== */
 /* ===================================================== */
-.about{display:flex;align-items:center;padding:80px 0}
+.about{display:flex;align-items:center;padding:60px 0}
 .about-bg1{position:absolute;top:25%;right:0;width:500px;height:500px;background:var(--primary-5);border-radius:50%;filter:blur(120px);pointer-events:none}
 .about-bg2{position:absolute;bottom:25%;left:0;width:400px;height:400px;background:var(--primary-5);border-radius:50%;filter:blur(100px);pointer-events:none}
 
-.about-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:start}
-@media(min-width:1024px){.about-grid{grid-template-columns:7fr 5fr;gap:40px}}
+.about-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
+@media(min-width:1024px){.about-grid{grid-template-columns:7fr 5fr;gap:32px}}
 
-.about-card{background:var(--card);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:28px;backdrop-filter:blur(4px)}
-@media(min-width:768px){.about-card{padding:28px}}
+.about-card{background:var(--card);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:24px;backdrop-filter:blur(4px)}
 
-.about-header{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:16px}
-.about-name{font-size:clamp(20px,3vw,30px);font-weight:900;letter-spacing:-.02em}
+.about-header{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:12px}
+.about-name{font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-.02em}
 .about-title-tag{padding:2px 10px;border-radius:6px;background:var(--primary-10);color:var(--primary);font-size:12px;font-weight:500}
 .about-edu{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
 .about-edu svg{width:14px;height:14px;color:var(--primary-70)}
-.about-contact{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;font-size:12px;color:var(--muted)}
+.about-contact{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px;font-size:12px;color:var(--muted)}
 .about-contact span{display:inline-flex;align-items:center;gap:6px}
 .about-contact svg{width:12px;height:12px;color:var(--primary-70)}
-.about-bio{font-size:14px;line-height:1.8;color:var(--muted);padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+.about-bio{font-size:13px;line-height:1.8;color:var(--muted);padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--border)}
 
-/* Tabs */
-.about-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
-.tab-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:12px;font-weight:500;border-radius:8px;background:var(--muted-bg);color:var(--muted);transition:all .2s}
-.tab-btn:hover{background:var(--primary-10);color:var(--fg)}
-.tab-btn.active{background:var(--primary);color:var(--primary-fg)}
-.tab-btn svg{width:14px;height:14px}
-.tab-content{min-height:220px}
-.tab-pane{animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* 修改3: 折叠面板 Accordion */
+.accordion{display:flex;flex-direction:column;gap:8px}
+.accordion-item{border:1px solid var(--border);border-radius:8px;background:var(--muted-bg);overflow:hidden;transition:all .2s}
+.accordion-item.open{border-color:var(--primary-30);background:var(--primary-5)}
+.accordion-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:all .2s;user-select:none}
+.accordion-header:hover{background:var(--primary-10)}
+.accordion-icon{width:28px;height:28px;border-radius:6px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.accordion-icon svg{width:14px;height:14px;color:var(--primary)}
+.accordion-title{font-size:14px;font-weight:600;flex:1}
+.accordion-count{font-size:11px;color:var(--muted);font-family:monospace}
+.accordion-arrow{width:16px;height:16px;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.accordion-item.open .accordion-arrow{transform:rotate(180deg);color:var(--primary)}
+.accordion-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.accordion-item.open .accordion-content{max-height:600px;overflow-y:auto}
+.accordion-inner{padding:0 16px 16px 54px}
 
 /* Internships */
-.intern-list{display:flex;flex-direction:column;gap:10px}
-.intern-item{padding:12px;border-radius:8px;background:var(--muted-bg);border:1px solid var(--border)}
+.intern-list{display:flex;flex-direction:column;gap:8px}
+.intern-item{padding:10px;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
 .intern-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:4px}
-.intern-top svg{width:14px;height:14px;color:var(--primary);flex-shrink:0}
-.intern-company{font-size:14px;font-weight:600}
+.intern-top svg{width:12px;height:12px;color:var(--primary);flex-shrink:0}
+.intern-company{font-size:13px;font-weight:600}
 .intern-pos{padding:2px 6px;font-size:10px;border-radius:4px;background:var(--primary-10);color:var(--primary)}
-.intern-period{margin-left:auto;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.intern-period svg{width:10px;height:10px}
+.intern-period{margin-left:auto;font-size:11px;color:var(--muted)}
 .intern-desc{font-size:12px;line-height:1.7;color:var(--muted)}
 
 /* Design fields */
 .fields-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 @media(min-width:768px){.fields-grid{grid-template-columns:repeat(5,1fr)}}
-.field-item{padding:12px;border-radius:8px;background:var(--muted-bg);border:1px solid var(--border);text-align:center;transition:all .2s}
+.field-item{padding:10px;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid var(--border);text-align:center;transition:all .2s}
 .field-item:hover{border-color:var(--primary-30);background:var(--primary-10)}
-.field-icon{width:32px;height:32px;border-radius:6px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+.field-icon{width:28px;height:28px;border-radius:6px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;margin:0 auto 4px}
 .field-icon svg{width:14px;height:14px;color:var(--primary)}
-.field-name{font-size:12px;font-weight:600;margin-bottom:2px}
+.field-name{font-size:11px;font-weight:600;margin-bottom:2px}
 .field-desc{font-size:10px;color:var(--muted)}
 
 /* Works preview */
@@ -216,20 +220,17 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 .work-thumb .overlay span{font-size:10px;font-weight:500;color:#fff;text-align:center;line-height:1.3}
 
 /* Tools */
-.tools-group{margin-bottom:16px}
+.tools-group{margin-bottom:12px}
 .tools-group:last-child{margin-bottom:0}
-.tools-label{font-size:11px;font-weight:600;color:var(--primary-70);margin-bottom:8px}
+.tools-label{font-size:11px;font-weight:600;color:var(--primary-70);margin-bottom:6px}
 .tools-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tool-tag{display:flex;align-items:center;gap:6px;padding:4px 10px;font-size:12px;border-radius:6px;border:1px solid var(--border);background:var(--muted-bg)}
+.tool-tag{display:flex;align-items:center;gap:6px;padding:4px 10px;font-size:12px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.03)}
 .tool-tag.ai{background:var(--primary-5);border-color:var(--primary-20)}
 .tool-tag-icon{width:16px;height:16px;border-radius:4px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--primary)}
 
-/* Chibi character */
-.chibi-wrap{position:relative;width:100%;max-width:320px;margin:0 auto;display:flex;flex-direction:column;align-items:center;padding-top:16px}
-@media(min-width:1024px){.chibi-wrap{padding-top:8px}}
-.chibi-circle{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.chibi-circle div{width:280px;height:280px;border-radius:50%;background:linear-gradient(135deg,var(--primary-12),var(--primary-3));border:1px solid var(--primary-10);box-shadow:0 0 30px var(--primary-10)}
-.chibi-img{position:relative;z-index:1;width:100%;height:auto;border-radius:16px;overflow:hidden;animation:chibiFloat 3s ease-in-out infinite;transform-origin:center bottom}
+/* 修改2: 人物形象 - 去掉背景圆 */
+.chibi-wrap{position:relative;width:100%;max-width:300px;margin:0 auto;display:flex;flex-direction:column;align-items:center;padding-top:8px}
+.chibi-img{position:relative;z-index:1;width:100%;height:auto;animation:chibiFloat 3s ease-in-out infinite;transform-origin:center bottom}
 @keyframes chibiFloat{
   0%,100%{transform:translateY(0) rotate(0)}
   25%{transform:translateY(-4px) rotate(1deg)}
@@ -237,9 +238,7 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
   75%{transform:translateY(-4px) rotate(-1deg)}
 }
 .chibi-img img{width:100%;height:auto;object-fit:contain}
-.chibi-shadow{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:50%;height:16px;background:rgba(0,0,0,.3);border-radius:50%;filter:blur(6px);z-index:0}
-.chibi-bubble{position:absolute;top:8px;right:0;padding:6px 14px;border-radius:999px;background:var(--primary-15);border:1px solid var(--primary-30);color:var(--primary);font-size:14px;font-weight:600;z-index:20;animation:bubblePop 8s ease-in-out infinite}
-@media(min-width:1024px){.chibi-bubble{right:-8px}}
+.chibi-bubble{position:absolute;top:0;right:0;padding:6px 14px;border-radius:999px;background:var(--primary-15);border:1px solid var(--primary-30);color:var(--primary);font-size:14px;font-weight:600;z-index:20;animation:bubblePop 8s ease-in-out infinite}
 @keyframes bubblePop{
   0%,62.5%,100%{opacity:0;transform:scale(.8) translateY(5px)}
   72.5%,87.5%{opacity:1;transform:scale(1) translateY(0)}
@@ -251,17 +250,23 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 /* ===================================================== */
 /* ============== SECTION 3: PORTFOLIO ================= */
 /* ===================================================== */
-.portfolio{padding:60px 0;display:flex;flex-direction:column;justify-content:center}
-.portfolio-header{text-align:center;margin-bottom:24px}
-.portfolio-header h2{font-size:clamp(28px,4vw,48px);font-weight:900}
+.portfolio{padding:40px 0;display:flex;flex-direction:column;justify-content:center}
+.portfolio-header{text-align:center;margin-bottom:16px}
+.portfolio-header h2{font-size:clamp(28px,4vw,44px);font-weight:900}
 .portfolio-header h2 span{color:var(--primary)}
-.portfolio-header p{color:var(--muted);margin-top:8px}
+.portfolio-header p{color:var(--muted);margin-top:6px;font-size:13px}
 
-/* Category filter */
-.portfolio-filter{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-.filter-btn{padding:8px 20px;font-size:13px;font-weight:500;border-radius:8px;color:var(--muted);transition:all .2s;border:1px solid transparent}
+/* Category filter - 修改5: 加减分类按钮 */
+.portfolio-filter{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-btn{padding:6px 16px;font-size:12px;font-weight:500;border-radius:8px;color:var(--muted);transition:all .2s;border:1px solid transparent;display:inline-flex;align-items:center;gap:6px}
 .filter-btn:hover{color:var(--fg);background:var(--muted-bg)}
 .filter-btn.active{background:var(--primary);color:var(--primary-fg)}
+.filter-btn .cat-del{display:none;width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,.2);align-items:center;justify-content:center;font-size:10px;line-height:1}
+.edit-mode .filter-btn .cat-del{display:inline-flex}
+.filter-btn .cat-del:hover{background:rgba(0,0,0,.4)}
+.add-cat-btn{display:none;padding:6px 12px;font-size:12px;border-radius:8px;border:1px dashed var(--border);color:var(--muted);transition:all .2s}
+.edit-mode .add-cat-btn{display:inline-flex;align-items:center;gap:4px}
+.add-cat-btn:hover{border-color:var(--primary);color:var(--primary)}
 
 /* Horizontal scroll */
 .portfolio-scroll{position:relative;width:100%}
@@ -270,15 +275,16 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 .portfolio-track::-webkit-scrollbar-track{background:transparent}
 .portfolio-track::-webkit-scrollbar-thumb{background:var(--primary-30);border-radius:3px}
 
-.portfolio-card{flex:0 0 360px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s}
+/* 修改6: 作品卡片展示更全面 */
+.portfolio-card{flex:0 0 380px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s}
 .portfolio-card:hover{transform:translateY(-6px);border-color:var(--primary-30);box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.portfolio-card-img{aspect-ratio:4/3;overflow:hidden;position:relative}
-.portfolio-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.portfolio-card:hover .portfolio-card-img img{transform:scale(1.05)}
-.portfolio-card-body{padding:20px}
+.portfolio-card-img{aspect-ratio:3/4;overflow:hidden;position:relative;background:#0a0a0a}
+.portfolio-card-img img{width:100%;height:100%;object-fit:contain;transition:transform .5s;padding:8px}
+.portfolio-card:hover .portfolio-card-img img{transform:scale(1.02)}
+.portfolio-card-body{padding:16px 20px 20px}
 .portfolio-card-cat{display:inline-block;padding:2px 10px;font-size:11px;border-radius:4px;background:var(--primary-10);color:var(--primary);margin-bottom:8px;font-weight:500}
-.portfolio-card-title{font-size:18px;font-weight:700;margin-bottom:6px}
-.portfolio-card-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.portfolio-card-title{font-size:17px;font-weight:700;margin-bottom:6px}
+.portfolio-card-desc{font-size:12px;color:var(--muted);line-height:1.6}
 
 /* Scroll arrows */
 .scroll-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all .2s}
@@ -288,69 +294,75 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 @media(max-width:768px){.scroll-arrow{display:none}}
 
 /* Edit mode add card */
-.add-project-card{flex:0 0 200px;border:2px dashed var(--border);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;cursor:pointer;transition:all .2s;color:var(--muted)}
+.add-project-card{flex:0 0 200px;border:2px dashed var(--border);border-radius:16px;display:none;flex-direction:column;align-items:center;justify-content:center;min-height:320px;cursor:pointer;transition:all .2s;color:var(--muted)}
+.edit-mode .add-project-card{display:flex}
 .add-project-card:hover{border-color:var(--primary);color:var(--primary)}
 .add-project-card svg{width:32px;height:32px;margin-bottom:8px}
 .add-project-card span{font-size:13px}
 
-.edit-delete-btn{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(220,38,38,.9);color:#fff;display:flex;align-items:center;justify-content:center;z-index:5;cursor:pointer;transition:all .2s}
+.edit-delete-btn{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(220,38,38,.9);color:#fff;display:none;align-items:center;justify-content:center;z-index:5;cursor:pointer;transition:all .2s}
+.edit-mode .edit-delete-btn{display:flex}
 .edit-delete-btn:hover{background:rgb(220,38,38)}
 
 /* ===================================================== */
 /* =============== SECTION 4: SKILLS =================== */
 /* ===================================================== */
-.skills{padding:80px 0;display:flex;align-items:center}
+.skills{padding:60px 0;display:flex;align-items:center}
 .skills-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:var(--primary-5);border-radius:50%;filter:blur(150px);pointer-events:none}
-.skills-grid{display:grid;grid-template-columns:1fr;gap:24px}
-@media(min-width:1024px){.skills-grid{grid-template-columns:5fr 7fr;gap:32px}}
+.skills-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:1024px){.skills-grid{grid-template-columns:5fr 7fr;gap:28px}}
 
-.skills-card{background:var(--card);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:24px;backdrop-filter:blur(4px)}
-.skills-card h3{font-size:16px;font-weight:700;margin-bottom:4px}
-.skills-card .sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+.skills-card{background:var(--card);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:20px;backdrop-filter:blur(4px)}
+.skills-card h3{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.skills-card h3::before{content:'';width:4px;height:16px;background:var(--primary);border-radius:2px}
+.skills-card .sub{font-size:12px;color:var(--muted);margin-bottom:12px}
 
-#radar-chart{width:100%;height:320px}
+#radar-chart{width:100%;height:280px}
 
-/* Progress bars */
-.skill-bars{display:flex;flex-direction:column;gap:16px}
-.skill-bar-row{display:flex;align-items:center;justify-content:center;justify-content:space-between;margin-bottom:6px}
-.skill-bar-name{font-size:14px;font-weight:500}
+/* Progress bars - 修改7: 优化 */
+.skill-bars{display:flex;flex-direction:column;gap:14px}
+.skill-bar-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.skill-bar-name{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
+.skill-bar-name .skill-dot{width:8px;height:8px;border-radius:50%;background:var(--primary)}
 .skill-bar-val{font-size:12px;color:var(--primary);font-family:monospace;font-weight:600}
-.skill-bar-track{height:6px;border-radius:999px;background:var(--muted-bg);overflow:hidden}
-.skill-bar-fill{height:100%;border-radius:999px;background:var(--primary);width:0;transition:width 1.2s ease-out}
+.skill-bar-track{height:8px;border-radius:999px;background:var(--muted-bg);overflow:hidden;position:relative}
+.skill-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--primary),hsl(160 70% 60%));width:0;transition:width 1.2s ease-out;position:relative}
+.skill-bar-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));border-radius:999px}
 
 /* Tools wall */
-.tools-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tools-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
 @media(min-width:640px){.tools-wall{grid-template-columns:repeat(6,1fr)}}
 @media(min-width:1024px){.tools-wall{grid-template-columns:repeat(8,1fr)}}
-.tool-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:8px;background:var(--muted-bg);border:1px solid var(--border);transition:all .2s;cursor:default}
-.tool-item:hover{border-color:var(--primary-30);background:var(--primary-5)}
-.tool-icon{width:32px;height:32px;border-radius:6px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:var(--primary)}
+.tool-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:8px;background:var(--muted-bg);border:1px solid var(--border);transition:all .2s;cursor:default}
+.tool-item:hover{border-color:var(--primary-30);background:var(--primary-5);transform:translateY(-2px)}
+.tool-icon{width:30px;height:30px;border-radius:6px;background:var(--primary-10);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:var(--primary)}
 .tool-name{font-size:10px;color:var(--muted);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
 
 /* ===================================================== */
 /* =============== SECTION 5: CONTACT ================== */
 /* ===================================================== */
 .contact{display:flex;align-items:center}
-.contact-wrap{text-align:center}
+.contact-wrap{text-align:center;max-width:900px;margin:0 auto}
 .contact h2{font-size:clamp(32px,5vw,56px);font-weight:900;margin-bottom:16px}
 .contact h2 span{color:var(--primary)}
-.contact .sub{font-size:clamp(14px,1.5vw,18px);color:var(--muted);margin-bottom:48px}
-.contact-grid{display:grid;grid-template-columns:1fr;gap:48px;max-width:900px;margin:0 auto;text-align:left}
-@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr;gap:64px}}
-.contact-info h3{font-size:20px;font-weight:700;margin-bottom:24px}
-.info-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px}
-.info-icon{width:44px;height:44px;border-radius:12px;background:var(--primary-10);border:1px solid var(--primary-20);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.info-icon svg{width:20px;height:20px;color:var(--primary)}
-.info-label{font-size:12px;color:var(--muted);margin-bottom:2px}
-.info-value{font-size:15px;font-weight:500}
-.contact-form h3{font-size:20px;font-weight:700;margin-bottom:24px}
-.form-row{margin-bottom:16px}
-.form-row label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-.form-row input,.form-row textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:14px;transition:all .2s}
-.form-row input:focus,.form-row textarea:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-10)}
-.form-row textarea{resize:vertical;min-height:100px}
-.form-submit{width:100%;padding:14px;border-radius:8px;background:var(--primary);color:var(--primary-fg);font-size:15px;font-weight:600;transition:all .2s}
-.form-submit:hover{opacity:.9}
+.contact .sub{font-size:clamp(14px,1.5vw,18px);color:var(--muted);margin-bottom:40px}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:800px;margin:0 auto 40px;text-align:left}
+@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr 1fr;gap:24px}}
+.contact-info-card{background:var(--card);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;transition:all .2s}
+.contact-info-card:hover{border-color:var(--primary-30);transform:translateY(-4px)}
+.info-icon{width:48px;height:48px;border-radius:12px;background:var(--primary-10);border:1px solid var(--primary-20);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.info-icon svg{width:22px;height:22px;color:var(--primary)}
+.info-label{font-size:12px;color:var(--muted);margin-bottom:4px}
+.info-value{font-size:15px;font-weight:600}
+
+/* 修改8: 联系按钮 */
+.contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.contact-btn{height:56px;padding:0 32px;border-radius:12px;font-size:16px;font-weight:600;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
+.contact-btn.primary{background:var(--primary);color:var(--primary-fg);box-shadow:0 8px 24px var(--primary-25)}
+.contact-btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px var(--primary-35)}
+.contact-btn.outline{border:1px solid rgba(255,255,255,.2);color:var(--fg)}
+.contact-btn.outline:hover{border-color:var(--primary-50);background:var(--primary-10);color:var(--primary)}
+.contact-btn svg{width:18px;height:18px}
 
 /* Footer */
 .footer-text{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--muted)}
@@ -389,15 +401,17 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 /* ===================================================== */
 @media(max-width:768px){
   html,body{overflow-x:hidden}
-  .hero-content{margin-left:0;padding:0 20px}
-  .hero-label{margin-bottom:20px}
+  .hero-content{padding:0 20px}
+  .hero-title{white-space:normal;font-size:clamp(36px,10vw,60px)}
+  .hero-label{margin-bottom:16px}
   .hero-buttons{flex-direction:column;gap:12px}
   .btn-primary,.btn-outline{width:100%;justify-content:center}
-  .about{padding:40px 0}
-  .about-card{padding:20px}
-  .portfolio-card{flex:0 0 280px}
-  .skills{padding:40px 0}
-  .section-title{margin-bottom:32px}
+  .about{padding:30px 0}
+  .about-card{padding:16px}
+  .portfolio-card{flex:0 0 300px}
+  .skills{padding:30px 0}
+  .section-title{margin-bottom:24px}
+  .contact-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -512,80 +526,98 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
             深耕AIGC视觉创作，专注构建标准化的AI美术生产管线。深厚的影像美学素养，擅长将摄影构图与光影逻辑融入AI生成画面。熟练运用Kling、Runway、ComfyUI等主流工具，攻克角色身份一致性与复杂运镜控制难题。拥有敏锐的技术迭代嗅觉，针对项目痛点优化提示词策略与工作流。
           </div>
 
-          <!-- Tabs -->
-          <div class="about-tabs" id="aboutTabs">
-            <button class="tab-btn active" data-tab="0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              实习经历
-            </button>
-            <button class="tab-btn" data-tab="1">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              设计领域
-            </button>
-            <button class="tab-btn" data-tab="2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              作品产出
-            </button>
-            <button class="tab-btn" data-tab="3">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              设计工具
-            </button>
-          </div>
-
-          <!-- Tab content -->
-          <div class="tab-content">
-            <div class="tab-pane" data-pane="0">
-              <div class="intern-list" id="internList">
-                <!-- rendered by JS -->
+          <!-- 修改3: 折叠面板 Accordion -->
+          <div class="accordion" id="aboutAccordion">
+            <!-- 实习经历 -->
+            <div class="accordion-item open" data-acc="0">
+              <div class="accordion-header" onclick="toggleAccordion(0)">
+                <div class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+                <span class="accordion-title">实习经历</span>
+                <span class="accordion-count">3段</span>
+                <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-            </div>
-            <div class="tab-pane" data-pane="1" style="display:none">
-              <div class="fields-grid">
-                <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="field-name">UI设计</div><div class="field-desc">APP/网页交互</div></div>
-                <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="field-name">包装设计</div><div class="field-desc">包装礼盒</div></div>
-                <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="field-name">品牌设计</div><div class="field-desc">VI视觉系统</div></div>
-                <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><div class="field-name">插画设计</div><div class="field-desc">插画IP</div></div>
-                <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 15h16"/><rect x="4" y="3" width="16" height="12" rx="2"/></svg></div><div class="field-name">海报设计</div><div class="field-desc">宣传视觉</div></div>
-              </div>
-            </div>
-            <div class="tab-pane" data-pane="2" style="display:none">
-              <div class="works-grid" id="worksGrid">
-                <!-- rendered by JS -->
-              </div>
-            </div>
-            <div class="tab-pane" data-pane="3" style="display:none">
-              <div class="tools-group">
-                <div class="tools-label">Adobe 系列</div>
-                <div class="tools-tags">
-                  <span class="tool-tag"><span class="tool-tag-icon">Ps</span>Photoshop</span>
-                  <span class="tool-tag"><span class="tool-tag-icon">Ai</span>Illustrator</span>
-                  <span class="tool-tag"><span class="tool-tag-icon">Ae</span>After Effects</span>
-                  <span class="tool-tag"><span class="tool-tag-icon">Pr</span>Premiere Pro</span>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="intern-list" id="internList"></div>
                 </div>
               </div>
-              <div class="tools-group">
-                <div class="tools-label">AIGC 工具</div>
-                <div class="tools-tags">
-                  <span class="tool-tag ai"><span class="tool-tag-icon">即梦</span>即梦</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">SD</span>Stable Diffusion</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">Sd</span>Seedance</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">Mj</span>Midjourney</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">Kl</span>Kling</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">Rw</span>Runway</span>
-                  <span class="tool-tag ai"><span class="tool-tag-icon">Cu</span>ComfyUI</span>
+            </div>
+            <!-- 设计领域 -->
+            <div class="accordion-item" data-acc="1">
+              <div class="accordion-header" onclick="toggleAccordion(1)">
+                <div class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+                <span class="accordion-title">设计领域</span>
+                <span class="accordion-count">5类</span>
+                <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="fields-grid">
+                    <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="field-name">UI设计</div><div class="field-desc">APP/网页交互</div></div>
+                    <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="field-name">包装设计</div><div class="field-desc">包装礼盒</div></div>
+                    <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="field-name">品牌设计</div><div class="field-desc">VI视觉系统</div></div>
+                    <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><div class="field-name">插画设计</div><div class="field-desc">插画IP</div></div>
+                    <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 15h16"/><rect x="4" y="3" width="16" height="12" rx="2"/></svg></div><div class="field-name">海报设计</div><div class="field-desc">宣传视觉</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 作品产出 -->
+            <div class="accordion-item" data-acc="2">
+              <div class="accordion-header" onclick="toggleAccordion(2)">
+                <div class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <span class="accordion-title">作品产出</span>
+                <span class="accordion-count">19件</span>
+                <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="works-grid" id="worksGrid"></div>
+                </div>
+              </div>
+            </div>
+            <!-- 设计工具 -->
+            <div class="accordion-item" data-acc="3">
+              <div class="accordion-header" onclick="toggleAccordion(3)">
+                <div class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                <span class="accordion-title">设计工具</span>
+                <span class="accordion-count">12个</span>
+                <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="accordion-content">
+                <div class="accordion-inner">
+                  <div class="tools-group">
+                    <div class="tools-label">Adobe 系列</div>
+                    <div class="tools-tags">
+                      <span class="tool-tag"><span class="tool-tag-icon">Ps</span>Photoshop</span>
+                      <span class="tool-tag"><span class="tool-tag-icon">Ai</span>Illustrator</span>
+                      <span class="tool-tag"><span class="tool-tag-icon">Ae</span>After Effects</span>
+                      <span class="tool-tag"><span class="tool-tag-icon">Pr</span>Premiere Pro</span>
+                    </div>
+                  </div>
+                  <div class="tools-group">
+                    <div class="tools-label">AIGC 工具</div>
+                    <div class="tools-tags">
+                      <span class="tool-tag ai"><span class="tool-tag-icon">即梦</span>即梦</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">SD</span>Stable Diffusion</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">Sd</span>Seedance</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">Mj</span>Midjourney</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">Kl</span>Kling</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">Rw</span>Runway</span>
+                      <span class="tool-tag ai"><span class="tool-tag-icon">Cu</span>ComfyUI</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: chibi character -->
+        <!-- 修改2: 右侧人物 - 替换图片，去掉背景圆 -->
         <div class="chibi-col">
           <div class="chibi-wrap">
-            <div class="chibi-circle"><div></div></div>
             <div class="chibi-img">
-              <img src="https://aka.doubaocdn.com/s/RsWUc0vlBL" alt="Q版卡通人物">
-              <div class="chibi-shadow"></div>
+              <img src="https://aka.doubaocdn.com/s/5I4xUyWNim" alt="Q版卡通人物">
             </div>
             <div class="chibi-bubble">你好 👋</div>
             <div class="chibi-name">
@@ -606,13 +638,14 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
         <h2>精选<span>作品</span>展示</h2>
         <p>涵盖UI设计、包装设计、品牌设计、插画设计、海报设计等多个方向</p>
       </div>
+      <!-- 修改5: 分类筛选 + 加减分类按钮 -->
       <div class="portfolio-filter" id="portfolioFilter">
         <button class="filter-btn active" data-cat="全部">全部</button>
-        <button class="filter-btn" data-cat="UI设计">UI设计</button>
-        <button class="filter-btn" data-cat="包装设计">包装设计</button>
-        <button class="filter-btn" data-cat="品牌设计">品牌设计</button>
-        <button class="filter-btn" data-cat="插画设计">插画设计</button>
-        <button class="filter-btn" data-cat="海报设计">海报设计</button>
+        <!-- 分类按钮由JS动态渲染 -->
+        <button class="add-cat-btn" onclick="addCategory()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          添加分类
+        </button>
       </div>
     </div>
     <div class="portfolio-scroll">
@@ -640,11 +673,11 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
         <!-- Left: Radar chart -->
         <div class="skills-card">
           <h3>能力雷达图</h3>
-          <p class="sub">六大设计能力维度</p>
+          <p class="sub">六大设计能力维度综合评估</p>
           <canvas id="radar-chart"></canvas>
         </div>
         <!-- Right: Progress + tools -->
-        <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:16px">
           <div class="skills-card">
             <h3>技能熟练度</h3>
             <div class="skill-bars" id="skillBars">
@@ -668,40 +701,34 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
       <div class="contact-wrap">
         <h2>让我们<span>一起</span>创造</h2>
         <p class="sub">有合作想法或项目需求？随时联系我</p>
+        <!-- 修改8: 三栏联系方式卡片 -->
         <div class="contact-grid">
-          <div class="contact-info">
-            <h3>联系方式</h3>
-            <div class="info-item">
-              <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-              <div><div class="info-label">电话</div><div class="info-value" data-field="phone" data-type="personalInfo">16611612831</div></div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><div class="info-label">邮箱</div><div class="info-value" data-field="email" data-type="personalInfo">3419113860@qq.com</div></div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-              <div><div class="info-label">学校</div><div class="info-value" data-field="school" data-type="personalInfo">天津理工大学</div></div>
-            </div>
+          <div class="contact-info-card">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="info-label">电话</div>
+            <div class="info-value" data-field="phone" data-type="personalInfo">16611612831</div>
           </div>
-          <div class="contact-form">
-            <h3>留言给我</h3>
-            <form onsubmit="handleContactSubmit(event)">
-              <div class="form-row">
-                <label>姓名</label>
-                <input type="text" placeholder="请输入您的姓名" required>
-              </div>
-              <div class="form-row">
-                <label>邮箱</label>
-                <input type="email" placeholder="请输入您的邮箱" required>
-              </div>
-              <div class="form-row">
-                <label>留言内容</label>
-                <textarea placeholder="请描述您的需求或想法..." required></textarea>
-              </div>
-              <button type="submit" class="form-submit">发送消息</button>
-            </form>
+          <div class="contact-info-card">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="info-label">邮箱</div>
+            <div class="info-value" data-field="email" data-type="personalInfo">3419113860@qq.com</div>
           </div>
+          <div class="contact-info-card">
+            <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div class="info-label">学校</div>
+            <div class="info-value" data-field="school" data-type="personalInfo">天津理工大学</div>
+          </div>
+        </div>
+        <!-- 修改8: 联系按钮 -->
+        <div class="contact-actions">
+          <a href="tel:16611612831" class="contact-btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            拨打电话
+          </a>
+          <a href="mailto:3419113860@qq.com" class="contact-btn outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            发送邮件
+          </a>
         </div>
         <div class="footer-text">© 2026 王恒达 Wang Hengda · All Rights Reserved</div>
       </div>
@@ -753,7 +780,7 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 // ====================================================
 // ================ DATA ==============================
 // ====================================================
-const STORAGE_KEY = 'portfolio-static-v1';
+const STORAGE_KEY = 'portfolio-static-v2';
 const EDIT_KEY = 'portfolio-static-edit';
 
 const DEFAULT_DATA = {
@@ -772,6 +799,7 @@ const DEFAULT_DATA = {
       { period:'2025.11 - 2026.01', company:'山西亦晟时代网络传媒', position:'AIGC视觉实习生', description:'负责漫剧项目的AIGC视觉开发，依据剧本完成角色与场景的AI生成及分镜预演。熟练运用即梦、Kling等视频模型产出动态素材，结合ComfyUI实现关键帧控制与姿态干预。' },
     ],
   },
+  categories: ['UI设计','包装设计','品牌设计','插画设计','海报设计'],
   skills: [
     { name:'平面设计', value:95 },
     { name:'UI/UX设计', value:90 },
@@ -954,17 +982,18 @@ styleEl.textContent = `
 document.head.appendChild(styleEl);
 
 // ====================================================
-// ============== ABOUT TABS ==========================
+// ============== ACCORDION (修改3) ===================
 // ====================================================
-document.querySelectorAll('#aboutTabs .tab-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const tab = parseInt(btn.dataset.tab);
-    document.querySelectorAll('#aboutTabs .tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
-    document.querySelectorAll('.tab-pane').forEach(pane=>{
-      pane.style.display = parseInt(pane.dataset.pane) === tab ? 'block' : 'none';
-    });
+function toggleAccordion(idx) {
+  const items = document.querySelectorAll('#aboutAccordion .accordion-item');
+  items.forEach((item, i) => {
+    if (i === idx) {
+      item.classList.toggle('open');
+    } else {
+      item.classList.remove('open');
+    }
   });
-});
+}
 
 // ====================================================
 // ============== INTERNSHIPS =========================
@@ -974,13 +1003,10 @@ function renderInternships() {
   list.innerHTML = appData.personalInfo.internships.map((item,idx)=>`
     <div class="intern-item" data-intern-idx="${idx}">
       <div class="intern-top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--primary);flex-shrink:0"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;color:var(--primary);flex-shrink:0"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         <span class="intern-company" data-field="company" data-type="internship" data-idx="${idx}">${item.company}</span>
         <span class="intern-pos" data-field="position" data-type="internship" data-idx="${idx}">${item.position}</span>
-        <span class="intern-period">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span data-field="period" data-type="internship" data-idx="${idx}">${item.period}</span>
-        </span>
+        <span class="intern-period" data-field="period" data-type="internship" data-idx="${idx}">${item.period}</span>
       </div>
       <div class="intern-desc" data-field="description" data-type="internship" data-idx="${idx}">${item.description}</div>
     </div>
@@ -1004,6 +1030,56 @@ function renderWorksGrid() {
 // ====================================================
 // ============== PORTFOLIO ===========================
 // ====================================================
+// 修改5: 渲染分类按钮
+function renderCategories() {
+  const filter = document.getElementById('portfolioFilter');
+  // 保留"全部"按钮和"添加分类"按钮，清除中间的分类按钮
+  const allBtn = filter.querySelector('[data-cat="全部"]');
+  const addBtn = filter.querySelector('.add-cat-btn');
+  filter.innerHTML = '';
+  filter.appendChild(allBtn);
+  appData.categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (currentCategory === cat ? ' active' : '');
+    btn.dataset.cat = cat;
+    btn.innerHTML = `${cat}<span class="cat-del" onclick="event.stopPropagation();deleteCategory('${cat}')">×</span>`;
+    btn.addEventListener('click', () => {
+      currentCategory = cat;
+      document.querySelectorAll('#portfolioFilter .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPortfolio();
+      document.getElementById('portfolioTrack').scrollLeft = 0;
+    });
+    filter.appendChild(btn);
+  });
+  filter.appendChild(addBtn);
+}
+
+// 修改5: 添加分类
+function addCategory() {
+  const name = prompt('请输入新分类名称：');
+  if (!name || !name.trim()) return;
+  if (appData.categories.includes(name.trim())) {
+    showToast('该分类已存在', 'error');
+    return;
+  }
+  appData.categories.push(name.trim());
+  saveData();
+  renderCategories();
+  showToast('分类已添加');
+}
+
+// 修改5: 删除分类
+function deleteCategory(cat) {
+  if (!confirm(`确定删除分类"${cat}"吗？该分类下的作品不会被删除。`)) return;
+  appData.categories = appData.categories.filter(c => c !== cat);
+  if (currentCategory === cat) currentCategory = '全部';
+  saveData();
+  renderCategories();
+  renderPortfolio();
+  showToast('分类已删除');
+}
+
 function renderPortfolio() {
   const track = document.getElementById('portfolioTrack');
   const filtered = currentCategory === '全部'
@@ -1020,8 +1096,8 @@ function renderPortfolio() {
       </div>
       <div class="portfolio-card-body">
         <span class="portfolio-card-cat">${p.category}</span>
-        <h3 class="portfolio-card-title">${p.title}</h3>
-        <p class="portfolio-card-desc">${p.description}</p>
+        <h3 class="portfolio-card-title" data-field="title" data-type="project" data-id="${p.id}">${p.title}</h3>
+        <p class="portfolio-card-desc" data-field="description" data-type="project" data-id="${p.id}">${p.description}</p>
       </div>
     </div>
   `).join('');
@@ -1036,12 +1112,39 @@ function renderPortfolio() {
   }
 
   track.innerHTML = html;
+  // 修改4: 绑定作品可编辑
+  if (editMode) {
+    bindProjectEditables();
+  }
+}
+
+// 修改4: 绑定作品可编辑元素
+function bindProjectEditables() {
+  document.querySelectorAll('[data-type="project"]').forEach(el => {
+    el.setAttribute('contenteditable', 'true');
+    el.addEventListener('blur', handleProjectEditableBlur);
+    el.addEventListener('keydown', handleEditableKeydown);
+  });
+}
+
+// 修改4: 处理作品可编辑失焦
+function handleProjectEditableBlur(e) {
+  const el = e.target;
+  const field = el.dataset.field;
+  const id = el.dataset.id;
+  const val = el.textContent.trim();
+  const project = appData.projects.find(p => p.id === id);
+  if (project) {
+    project[field] = val;
+    saveData();
+  }
 }
 
 // Filter
 document.querySelectorAll('#portfolioFilter .filter-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#portfolioFilter .filter-btn').forEach(b=>b.classList.toggle('active', b===btn));
+    document.querySelectorAll('#portfolioFilter .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
     currentCategory = btn.dataset.cat;
     renderPortfolio();
     document.getElementById('portfolioTrack').scrollLeft = 0;
@@ -1139,7 +1242,7 @@ function renderSkillBars() {
   bars.innerHTML = appData.skills.map((s,i)=>`
     <div>
       <div class="skill-bar-row">
-        <span class="skill-bar-name">${s.name}</span>
+        <span class="skill-bar-name"><span class="skill-dot"></span>${s.name}</span>
         <span class="skill-bar-val">${s.value}%</span>
       </div>
       <div class="skill-bar-track">
@@ -1149,10 +1252,12 @@ function renderSkillBars() {
   `).join('');
 }
 function animateSkillBars() {
-  document.querySelectorAll('.skill-bar-fill').forEach(el=>{
-    const target = el.dataset.target;
-    el.style.width = target + '%';
-  });
+  setTimeout(() => {
+    document.querySelectorAll('.skill-bar-fill').forEach(el=>{
+      const target = el.dataset.target;
+      el.style.width = target + '%';
+    });
+  }, 200);
 }
 
 // ====================================================
@@ -1175,6 +1280,7 @@ let radarChart = null;
 function initRadarChart() {
   const ctx = document.getElementById('radar-chart').getContext('2d');
   const data = appData.skills;
+  if (radarChart) radarChart.destroy();
   radarChart = new Chart(ctx, {
     type: 'radar',
     data: {
@@ -1182,7 +1288,7 @@ function initRadarChart() {
       datasets: [{
         label: '能力值',
         data: data.map(s=>s.value),
-        backgroundColor: 'rgba(0, 212, 170, 0.2)',
+        backgroundColor: 'rgba(0, 212, 170, 0.15)',
         borderColor: 'hsl(160, 70%, 50%)',
         borderWidth: 2,
         pointBackgroundColor: 'hsl(160, 70%, 50%)',
@@ -1203,7 +1309,7 @@ function initRadarChart() {
           grid: { color: 'rgba(255,255,255,0.08)' },
           angleLines: { color: 'rgba(255,255,255,0.1)' },
           pointLabels: {
-            color: 'rgba(255,255,255,0.6)',
+            color: 'rgba(255,255,255,0.7)',
             font: { size: 12, weight: '500' }
           },
           suggestedMin: 0,
@@ -1222,6 +1328,7 @@ function toggleEditMode() {
   applyEditMode();
   showToast(editMode ? '编辑模式已开启，点击文字可编辑' : '已退出编辑模式');
   renderPortfolio();
+  renderCategories();
 }
 
 function applyEditMode() {
@@ -1229,18 +1336,23 @@ function applyEditMode() {
   document.getElementById('editToolbar').style.display = editMode ? 'flex' : 'none';
   document.getElementById('editToggle').textContent = editMode ? '退出编辑' : '编辑模式';
 
+  // 清除旧的绑定
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    el.removeAttribute('contenteditable');
+    el.removeEventListener('blur', handleEditableBlur);
+    el.removeEventListener('keydown', handleEditableKeydown);
+    el.removeEventListener('blur', handleProjectEditableBlur);
+  });
+
   if (editMode) {
-    document.querySelectorAll('[data-field]').forEach(el=>{
+    // 个人信息可编辑
+    document.querySelectorAll('[data-type="personalInfo"], [data-type="internship"]').forEach(el=>{
       el.setAttribute('contenteditable', 'true');
       el.addEventListener('blur', handleEditableBlur);
       el.addEventListener('keydown', handleEditableKeydown);
     });
-  } else {
-    document.querySelectorAll('[data-field]').forEach(el=>{
-      el.removeAttribute('contenteditable');
-      el.removeEventListener('blur', handleEditableBlur);
-      el.removeEventListener('keydown', handleEditableKeydown);
-    });
+    // 作品可编辑（修改4）
+    bindProjectEditables();
   }
 }
 
@@ -1283,13 +1395,13 @@ function deleteProject(id) {
 function addProject() {
   const title = prompt('作品名称：');
   if (!title) return;
-  const category = prompt('分类（UI设计 / 包装设计 / 品牌设计 / 插画设计 / 海报设计）：', 'UI设计');
+  const category = prompt('分类（' + appData.categories.join(' / ') + '）：', appData.categories[0]);
   if (!category) return;
   const imageUrl = prompt('图片URL：', 'https://aka.doubaocdn.com/s/');
   if (!imageUrl) return;
   const desc = prompt('简短描述：', '') || '';
-  const shortDesc = prompt('短设计说明：', '') || '';
-  const detail = prompt('详细设计说明：', '') || '';
+  const shortDesc = prompt('短设计说明（卡片展示）：', '') || '';
+  const detail = prompt('详细设计说明（详情弹窗展示）：', '') || '';
   const id = 'proj-' + Date.now();
   appData.projects.push({ id, title, category, imageUrl, description:desc, shortDesc, detail });
   saveData();
@@ -1325,6 +1437,7 @@ function handleImportFile(e) {
       const parsed = JSON.parse(String(reader.result));
       if (!parsed.projects || !parsed.personalInfo) throw new Error('格式无效');
       appData = parsed;
+      if (!appData.categories) appData.categories = ['UI设计','包装设计','品牌设计','插画设计','海报设计'];
       saveData();
       renderAll();
       showToast('数据导入成功');
@@ -1358,23 +1471,16 @@ function showToast(msg, type='success') {
 }
 
 // ====================================================
-// ============== CONTACT FORM ========================
-// ====================================================
-function handleContactSubmit(e) {
-  e.preventDefault();
-  showToast('消息已发送，感谢您的留言！');
-  e.target.reset();
-}
-
-// ====================================================
 // ============== RENDER ALL ==========================
 // ====================================================
 function renderAll() {
   renderInternships();
   renderWorksGrid();
+  renderCategories();
   renderPortfolio();
   renderSkillBars();
   renderTools();
+  if (radarChart) initRadarChart();
 }
 
 // ====================================================
