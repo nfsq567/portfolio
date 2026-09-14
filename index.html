@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>王恒达 · 平面视觉设计师作品集</title>
+<!-- 性能优化：预连接 CDN，加速图片加载 -->
+<link rel="preconnect" href="https://aka.doubaocdn.com" crossorigin>
+<link rel="dns-prefetch" href="https://aka.doubaocdn.com">
 <style>
 /* ========== Reset & Base ========== */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -279,8 +282,18 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 .portfolio-card{flex:0 0 380px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s}
 .portfolio-card:hover{transform:translateY(-6px);border-color:var(--primary-30);box-shadow:0 20px 40px rgba(0,0,0,.3)}
 .portfolio-card-img{aspect-ratio:3/4;overflow:hidden;position:relative;background:#0a0a0a}
-.portfolio-card-img img{width:100%;height:100%;object-fit:contain;transition:transform .5s;padding:8px}
+.portfolio-card-img img{width:100%;height:100%;object-fit:contain;transition:transform .5s,opacity .4s ease;padding:8px;opacity:0}
+.portfolio-card-img img.loaded{opacity:1}
 .portfolio-card:hover .portfolio-card-img img{transform:scale(1.02)}
+/* 图片加载占位符 - 骨架屏效果 */
+.img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(110deg,#111 8%,#1a1a1a 18%,#111 33%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.img-placeholder svg{width:32px;height:32px;color:#333;opacity:.6}
+.img-placeholder.hidden{display:none}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* 图片加载失败占位 */
+.img-error{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#111;color:#444}
+.img-error svg{width:32px;height:32px}
+.img-error span{font-size:11px}
 .portfolio-card-body{padding:16px 20px 20px}
 .portfolio-card-cat{display:inline-block;padding:2px 10px;font-size:11px;border-radius:4px;background:var(--primary-10);color:var(--primary);margin-bottom:8px;font-weight:500}
 .portfolio-card-title{font-size:17px;font-weight:700;margin-bottom:6px}
@@ -1207,7 +1220,10 @@ function renderPortfolio() {
   let html = filtered.map(p=>`
     <div class="portfolio-card" onclick="openModal('${p.id}')">
       <div class="portfolio-card-img">
-        <img src="${p.imageUrl}" alt="${p.title}" loading="lazy">
+        <div class="img-placeholder" id="ph-${p.id}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <img src="${p.imageUrl}" alt="${p.title}" loading="lazy" onload="handleImgLoad('${p.id}')" onerror="handleImgError('${p.id}')">
         ${editMode ? `<button class="edit-delete-btn" onclick="event.stopPropagation();deleteProject('${p.id}')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
         </button>` : ''}
@@ -1234,6 +1250,51 @@ function renderPortfolio() {
   if (editMode) {
     bindProjectEditables();
   }
+  // 性能优化：预加载当前可见区域的前4张作品图
+  preloadVisibleImages(filtered);
+}
+
+// 性能优化：图片加载完成 - 隐藏占位符，淡入图片
+function handleImgLoad(id) {
+  const img = document.querySelector(`#ph-${id} + img`);
+  const ph = document.getElementById(`ph-${id}`);
+  if (img) img.classList.add('loaded');
+  if (ph) ph.classList.add('hidden');
+}
+
+// 性能优化：图片加载失败 - 显示错误占位
+function handleImgError(id) {
+  const ph = document.getElementById(`ph-${id}`);
+  const img = document.querySelector(`#ph-${id} + img`);
+  if (img) img.style.display = 'none';
+  if (ph) {
+    ph.classList.remove('img-placeholder');
+    ph.classList.add('img-error');
+    ph.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>图片加载失败</span>
+    `;
+  }
+}
+
+// 性能优化：预加载可见区域的作品图片
+function preloadVisibleImages(projects) {
+  if (!projects || projects.length === 0) return;
+  // 只预加载前4张，避免一次性加载太多
+  const toPreload = projects.slice(0, 4);
+  toPreload.forEach((p, i) => {
+    const img = new Image();
+    img.src = p.imageUrl;
+    // 预加载完成后标记，避免重复加载
+    img.onload = () => {
+      const existing = document.querySelector(`#ph-${p.id} + img`);
+      if (existing && !existing.classList.contains('loaded')) {
+        existing.classList.add('loaded');
+        const ph = document.getElementById(`ph-${p.id}`);
+        if (ph) ph.classList.add('hidden');
+      }
+    };
+  });
 }
 
 // 修改4: 绑定作品可编辑元素
@@ -1585,12 +1646,43 @@ function handleImageUpload(e) {
     showToast('请选择图片文件', 'error');
     return;
   }
+  // 显示加载提示
+  showToast('正在处理图片...');
   const reader = new FileReader();
   reader.onload = function(event) {
-    uploadedImageData = event.target.result;
-    document.getElementById('previewImg').src = uploadedImageData;
-    document.getElementById('uploadPreview').style.display = 'block';
-    document.getElementById('uploadArea').style.display = 'none';
+    const img = new Image();
+    img.onload = function() {
+      // 性能优化：自动压缩图片，最大宽度 800px，JPEG 质量 0.82
+      const maxWidth = 800;
+      let width = img.width;
+      let height = img.height;
+      if (width > maxWidth) {
+        height = Math.round(height * maxWidth / width);
+        width = maxWidth;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      // 统一导出为 JPEG 格式（透明背景会变黑，但作品图一般不需要透明）
+      // 如果原图是 PNG 且有透明区域，保留 PNG
+      const isPng = file.type === 'image/png';
+      const quality = isPng ? undefined : 0.82;
+      const mimeType = isPng ? 'image/png' : 'image/jpeg';
+      uploadedImageData = canvas.toDataURL(mimeType, quality);
+      document.getElementById('previewImg').src = uploadedImageData;
+      document.getElementById('uploadPreview').style.display = 'block';
+      document.getElementById('uploadArea').style.display = 'none';
+      // 计算压缩后大小并提示
+      const compressedSize = Math.round(uploadedImageData.length * 3 / 4 / 1024);
+      const originalSize = Math.round(file.size / 1024);
+      showToast(`图片已压缩：${originalSize}KB → ${compressedSize}KB`);
+    };
+    img.onerror = function() {
+      showToast('图片解析失败', 'error');
+    };
+    img.src = event.target.result;
   };
   reader.readAsDataURL(file);
 }
