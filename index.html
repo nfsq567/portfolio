@@ -404,6 +404,38 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 .zoom-btn svg{width:14px;height:14px}
 .zoom-pct{position:absolute;bottom:16px;left:16px;padding:4px 10px;font-size:12px;background:rgba(0,0,0,.6);color:#fff;border-radius:4px;z-index:5}
 
+/* Add Project Modal */
+.add-project-modal{max-width:560px;max-height:85vh;display:flex;flex-direction:column}
+.add-project-header{padding:24px 28px 16px;border-bottom:1px solid var(--border)}
+.add-project-header h3{font-size:20px;font-weight:700;margin-bottom:4px}
+.add-project-header p{font-size:13px;color:var(--muted)}
+.add-project-body{padding:20px 28px;overflow-y:auto;flex:1}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--fg)}
+.form-group input[type="text"],.form-group select,.form-group textarea{width:100%;padding:10px 14px;background:var(--muted-bg);border:1px solid var(--border);border-radius:8px;font-size:14px;color:var(--fg);transition:border-color .2s;outline:none}
+.form-group input[type="text"]:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
+.form-group textarea{resize:vertical;font-family:inherit}
+.form-group select{cursor:pointer}
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--muted-bg);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.upload-area:hover{border-color:var(--primary);background:var(--primary-5)}
+.upload-area svg{width:36px;height:36px;color:var(--muted);margin:0 auto 8px}
+.upload-area span{display:block;font-size:14px;font-weight:500;margin-bottom:4px}
+.upload-area small{font-size:11px;color:var(--muted)}
+.upload-preview{position:relative;margin-top:12px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.upload-preview img{width:100%;max-height:200px;object-fit:contain;background:#000}
+.remove-img-btn{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(220,38,38,.9);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;line-height:1;border:none}
+.add-project-footer{padding:16px 28px;border-top:1px solid var(--border);display:flex;gap:12px;justify-content:flex-end}
+.btn-cancel{padding:10px 24px;border-radius:8px;border:1px solid var(--border);color:var(--muted);font-size:14px;font-weight:500;transition:all .2s}
+.btn-cancel:hover{color:var(--fg);background:var(--muted-bg)}
+.btn-submit{padding:10px 24px;border-radius:8px;background:var(--primary);color:var(--primary-fg);font-size:14px;font-weight:600;transition:all .2s}
+.btn-submit:hover{opacity:.9}
+
+/* Category inline input */
+.cat-input-wrap{display:inline-flex;align-items:center;gap:6px}
+.cat-input{width:100px;padding:4px 8px;font-size:12px;background:var(--card);border:1px solid var(--primary);border-radius:6px;color:var(--fg);outline:none}
+.cat-input-confirm{width:22px;height:22px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border:none}
+.cat-input-cancel{width:22px;height:22px;border-radius:50%;background:var(--muted-bg);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border:none}
+
 /* ===================================================== */
 /* ============== MOBILE ADJUSTMENTS =================== */
 /* ===================================================== */
@@ -769,6 +801,58 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
   </div>
 </div>
 
+<!-- ===== ADD PROJECT MODAL ===== -->
+<div class="modal-overlay" id="addProjectModal" onclick="if(event.target===this)closeAddProjectModal()">
+  <div class="modal add-project-modal">
+    <button class="modal-close" onclick="closeAddProjectModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="add-project-header">
+      <h3>添加新作品</h3>
+      <p>填写作品信息，上传作品图片</p>
+    </div>
+    <div class="add-project-body">
+      <div class="form-group">
+        <label>作品名称 *</label>
+        <input type="text" id="newProjTitle" placeholder="请输入作品名称">
+      </div>
+      <div class="form-group">
+        <label>作品分类 *</label>
+        <select id="newProjCategory"></select>
+      </div>
+      <div class="form-group">
+        <label>作品图片 *</label>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('newProjImage').click()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>点击上传作品图片</span>
+          <small>支持 JPG / PNG，建议尺寸 800x1000</small>
+        </div>
+        <input type="file" id="newProjImage" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+        <div class="upload-preview" id="uploadPreview" style="display:none">
+          <img id="previewImg" src="" alt="预览">
+          <button class="remove-img-btn" onclick="removeUploadedImage()">×</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>简短描述</label>
+        <input type="text" id="newProjDesc" placeholder="一句话描述作品">
+      </div>
+      <div class="form-group">
+        <label>短设计说明（卡片展示）</label>
+        <textarea id="newProjShort" rows="2" placeholder="简短的设计说明，显示在作品卡片上"></textarea>
+      </div>
+      <div class="form-group">
+        <label>详细设计说明（详情弹窗展示）</label>
+        <textarea id="newProjDetail" rows="4" placeholder="详细的设计说明，显示在作品详情弹窗中"></textarea>
+      </div>
+    </div>
+    <div class="add-project-footer">
+      <button class="btn-cancel" onclick="closeAddProjectModal()">取消</button>
+      <button class="btn-submit" onclick="submitNewProject()">添加作品</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== EDIT TOOLBAR ===== -->
 <div class="edit-toolbar" id="editToolbar" style="display:none">
   <button onclick="exportData()">导出JSON</button>
@@ -1067,18 +1151,40 @@ function renderCategories() {
   filter.appendChild(addBtn);
 }
 
-// 修改5: 添加分类
+// 修改5: 添加分类 - 内联输入框
 function addCategory() {
-  const name = prompt('请输入新分类名称：');
-  if (!name || !name.trim()) return;
-  if (appData.categories.includes(name.trim())) {
-    showToast('该分类已存在', 'error');
-    return;
-  }
-  appData.categories.push(name.trim());
+  const filter = document.getElementById('portfolioFilter');
+  // 检查是否已经有输入框
+  if (document.getElementById('newCatInput')) return;
+  // 创建内联输入框
+  const wrap = document.createElement('div');
+  wrap.className = 'cat-input-wrap';
+  wrap.innerHTML = `
+    <input type="text" id="newCatInput" class="cat-input" placeholder="分类名称" maxlength="10">
+    <button class="cat-input-confirm" onclick="confirmAddCategory()">✓</button>
+    <button class="cat-input-cancel" onclick="cancelAddCategory()">×</button>
+  `;
+  filter.insertBefore(wrap, filter.querySelector('.add-cat-btn'));
+  document.getElementById('newCatInput').focus();
+  document.getElementById('newCatInput').addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter') confirmAddCategory();
+    if (e.key === 'Escape') cancelAddCategory();
+  });
+}
+
+function confirmAddCategory() {
+  const input = document.getElementById('newCatInput');
+  const name = input.value.trim();
+  if (!name) { showToast('请输入分类名称', 'error'); return; }
+  if (appData.categories.includes(name)) { showToast('该分类已存在', 'error'); return; }
+  appData.categories.push(name);
   saveData();
   renderCategories();
   showToast('分类已添加');
+}
+
+function cancelAddCategory() {
+  renderCategories();
 }
 
 // 修改5: 删除分类
@@ -1447,23 +1553,78 @@ function deleteProject(id) {
   showToast('已删除作品');
 }
 
-// Add project
+// Add project - 打开表单弹窗
 function addProject() {
-  const title = prompt('作品名称：');
-  if (!title) return;
-  const category = prompt('分类（' + appData.categories.join(' / ') + '）：', appData.categories[0]);
-  if (!category) return;
-  const imageUrl = prompt('图片URL：', 'https://aka.doubaocdn.com/s/');
-  if (!imageUrl) return;
-  const desc = prompt('简短描述：', '') || '';
-  const shortDesc = prompt('短设计说明（卡片展示）：', '') || '';
-  const detail = prompt('详细设计说明（详情弹窗展示）：', '') || '';
+  // 填充分类下拉
+  const select = document.getElementById('newProjCategory');
+  select.innerHTML = appData.categories.map(c=>`<option value="${c}">${c}</option>`).join('');
+  // 清空表单
+  document.getElementById('newProjTitle').value = '';
+  document.getElementById('newProjDesc').value = '';
+  document.getElementById('newProjShort').value = '';
+  document.getElementById('newProjDetail').value = '';
+  document.getElementById('newProjImage').value = '';
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadArea').style.display = 'flex';
+  uploadedImageData = null;
+  // 打开弹窗
+  document.getElementById('addProjectModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAddProjectModal() {
+  document.getElementById('addProjectModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+let uploadedImageData = null;
+function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    showToast('请选择图片文件', 'error');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    uploadedImageData = event.target.result;
+    document.getElementById('previewImg').src = uploadedImageData;
+    document.getElementById('uploadPreview').style.display = 'block';
+    document.getElementById('uploadArea').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeUploadedImage() {
+  uploadedImageData = null;
+  document.getElementById('newProjImage').value = '';
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadArea').style.display = 'flex';
+}
+
+function submitNewProject() {
+  const title = document.getElementById('newProjTitle').value.trim();
+  const category = document.getElementById('newProjCategory').value;
+  const desc = document.getElementById('newProjDesc').value.trim();
+  const shortDesc = document.getElementById('newProjShort').value.trim();
+  const detail = document.getElementById('newProjDetail').value.trim();
+
+  if (!title) { showToast('请输入作品名称', 'error'); return; }
+  if (!uploadedImageData) { showToast('请上传作品图片', 'error'); return; }
+
   const id = 'proj-' + Date.now();
-  appData.projects.push({ id, title, category, imageUrl, description:desc, shortDesc, detail });
+  appData.projects.push({
+    id, title, category,
+    imageUrl: uploadedImageData,
+    description: desc || '暂无描述',
+    shortDesc: shortDesc || '暂无设计说明',
+    detail: detail || '暂无详细设计说明'
+  });
   saveData();
   renderPortfolio();
   renderWorksGrid();
-  showToast('已添加作品');
+  closeAddProjectModal();
+  showToast('作品添加成功');
 }
 
 // Export
