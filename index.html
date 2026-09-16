@@ -83,12 +83,28 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
 .edit-toolbar button:hover{color:var(--fg);background:var(--muted-bg)}
 .edit-toolbar button.primary{background:var(--primary);color:var(--primary-fg)}
 .edit-toolbar button.primary:hover{background:var(--primary);opacity:.9}
+.edit-toolbar button.publish-btn{background:linear-gradient(135deg,hsl(160 70% 45%),hsl(180 70% 45%));color:#fff;font-weight:600}
+.edit-toolbar button.publish-btn:hover{opacity:.9;transform:translateY(-1px)}
 
 /* ========== Toast ========== */
 .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);padding:12px 24px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px;z-index:300;opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.success{border-color:hsl(160 60% 30%)}
 .toast.error{border-color:hsl(0 60% 50%)}
+
+/* Token Modal */
+.token-modal{max-width:520px}
+.token-header{padding:24px 28px 16px;border-bottom:1px solid var(--border)}
+.token-header h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.token-header p{font-size:13px;color:var(--muted)}
+.token-body{padding:20px 28px;max-height:60vh;overflow-y:auto}
+.token-steps{margin-bottom:20px}
+.token-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:13px;line-height:1.6}
+.token-step a{color:var(--primary);text-decoration:underline}
+.step-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--primary-10);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.token-warning{display:flex;gap:8px;padding:12px;background:hsl(40 30% 10%);border:1px solid hsl(40 40% 25%);border-radius:8px;margin-top:16px;font-size:12px;color:hsl(40 40% 70%);line-height:1.6}
+.token-warning svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+.token-footer{padding:16px 28px;border-top:1px solid var(--border);display:flex;gap:12px;justify-content:flex-end}
 
 /* ===================================================== */
 /* =================== SECTION 1: HERO ================= */
@@ -867,8 +883,42 @@ input,textarea{font:inherit;color:inherit;border:none;outline:none;background:tr
   <button onclick="importData()">导入JSON</button>
   <button onclick="resetData()">重置数据</button>
   <button class="primary" onclick="toggleEditMode()">退出编辑</button>
+  <button class="publish-btn" onclick="publishToGithub()">🚀 发布到网站</button>
 </div>
 <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImportFile(event)">
+
+<!-- ===== GITHUB TOKEN CONFIG MODAL ===== -->
+<div class="modal-overlay" id="tokenModal" onclick="if(event.target===this)closeTokenModal()">
+  <div class="modal token-modal">
+    <button class="modal-close" onclick="closeTokenModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="token-header">
+      <h3>配置 GitHub 访问令牌</h3>
+      <p>只需配置一次，之后一键发布即可同步到网站</p>
+    </div>
+    <div class="token-body">
+      <div class="token-steps">
+        <div class="token-step"><span class="step-num">1</span><span>打开 <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Token 创建页面</a></span></div>
+        <div class="token-step"><span class="step-num">2</span><span>Note 填 "portfolio-publish"，Expiration 选 "No expiration"</span></div>
+        <div class="token-step"><span class="step-num">3</span><span>勾选 <strong>repo</strong> 权限（完整仓库访问）</span></div>
+        <div class="token-step"><span class="step-num">4</span><span>点击 "Generate token"，复制生成的令牌粘贴到下方</span></div>
+      </div>
+      <div class="form-group">
+        <label>GitHub 个人访问令牌 (Token)</label>
+        <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      </div>
+      <div class="token-warning">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>令牌只保存在你当前浏览器中，不会上传到任何服务器。建议使用专用令牌，不要泄露给他人。</span>
+      </div>
+    </div>
+    <div class="token-footer">
+      <button class="btn-cancel" onclick="closeTokenModal()">取消</button>
+      <button class="btn-submit" onclick="saveGithubToken()">保存并发布</button>
+    </div>
+  </div>
+</div>
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
@@ -972,6 +1022,113 @@ function saveEditMode(v) {
   localStorage.setItem(EDIT_KEY, v ? '1' : '0');
   editMode = v;
 }
+// ====================================================
+// ============== GITHUB PUBLISH ======================
+// ====================================================
+const GITHUB_CONFIG = { owner: 'nfsq567', repo: 'portfolio', branch: 'main', filePath: 'data.json' };
+const TOKEN_KEY = 'portfolio-github-token';
+
+function getGithubToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+
+function openTokenModal() {
+  document.getElementById('tokenModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTokenModal() {
+  document.getElementById('tokenModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function saveGithubToken() {
+  const token = document.getElementById('githubTokenInput').value.trim();
+  if (!token) { showToast('请输入 GitHub Token', 'error'); return; }
+  localStorage.setItem(TOKEN_KEY, token);
+  closeTokenModal();
+  showToast('Token 已保存，正在发布...');
+  setTimeout(() => publishToGithub(), 500);
+}
+
+async function publishToGithub() {
+  const token = getGithubToken();
+  if (!token) { openTokenModal(); return; }
+  
+  const publishBtn = document.querySelector('.publish-btn');
+  const originalText = publishBtn.textContent;
+  publishBtn.textContent = '发布中...';
+  publishBtn.disabled = true;
+  
+  try {
+    const apiUrl = 'https://api.github.com/repos/' + GITHUB_CONFIG.owner + '/' + GITHUB_CONFIG.repo + '/contents/' + GITHUB_CONFIG.filePath + '?ref=' + GITHUB_CONFIG.branch;
+    
+    let fileSha = '';
+    try {
+      const getResp = await fetch(apiUrl, {
+        headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+      });
+      if (getResp.ok) {
+        const getJson = await getResp.json();
+        fileSha = getJson.sha;
+      }
+    } catch(e) {}
+    
+    const dataToPublish = JSON.parse(JSON.stringify(appData));
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataToPublish, null, 2))));
+    
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Update portfolio data - ' + new Date().toLocaleString('zh-CN'),
+        content: content,
+        sha: fileSha || undefined,
+        branch: GITHUB_CONFIG.branch
+      })
+    });
+    
+    if (putResp.ok) {
+      showToast('发布成功！GitHub Pages 正在部署，约1-2分钟后生效', 'success');
+    } else {
+      if (putResp.status === 401) {
+        showToast('Token 无效或已过期，请重新配置', 'error');
+        localStorage.removeItem(TOKEN_KEY);
+        setTimeout(() => openTokenModal(), 1000);
+      } else if (putResp.status === 403) {
+        showToast('Token 权限不足，请确保勾选了 repo 权限', 'error');
+      } else {
+        showToast('发布失败 (' + putResp.status + ')，请检查网络或 Token', 'error');
+      }
+    }
+  } catch(e) {
+    showToast('发布失败：网络错误，请稍后重试', 'error');
+  } finally {
+    publishBtn.textContent = originalText;
+    publishBtn.disabled = false;
+  }
+}
+
+async function loadRemoteData() {
+  try {
+    const rawUrl = 'https://raw.githubusercontent.com/' + GITHUB_CONFIG.owner + '/' + GITHUB_CONFIG.repo + '/' + GITHUB_CONFIG.branch + '/' + GITHUB_CONFIG.filePath + '?t=' + Date.now();
+    const resp = await fetch(rawUrl, { cache: 'no-store' });
+    if (resp.ok) {
+      const remoteData = await resp.json();
+      if (remoteData && remoteData.projects && remoteData.personalInfo) {
+        const localRaw = localStorage.getItem(STORAGE_KEY);
+        if (!localRaw) {
+          appData = remoteData;
+          saveData();
+          renderAll();
+        }
+      }
+    }
+  } catch(e) {}
+}
+
 
 // ====================================================
 // ============== FULLPAGE SCROLL =====================
@@ -1764,6 +1921,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initParticles();
   renderAll();
   applyEditMode();
+  loadRemoteData();
 });
 </script>
 </body>
