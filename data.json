@@ -3,29 +3,17 @@
     "name": "王恒达",
     "title": "平面视觉设计师",
     "phone": "16611612831",
-    "email": "3419113860@qq.com",
+    "email": "16611612831@163.com",
     "school": "天津理工大学",
     "major": "视觉传达设计",
     "majorPeriod": "2023.09 - 2027.06",
-    "bio": "深耕AIGC视觉创作，专注构建标准化的AI美术生产管线。深厚的影像美学素养，擅长将摄影构图与光影逻辑融入AI生成画面。熟练运用Kling、Runway、ComfyUI等主流工具，攻克角色身份一致性与复杂运镜控制难题。拥有敏锐的技术迭代嗅觉，针对项目痛点优化提示词策略与工作流。",
+    "bio": "视觉传达专业在读，具备平面排版与图文美化基础，能独立完成PPT、公众号推文、海报等物料的版式与配图；业余自学AIGC视觉制作，使用即梦、Midjourney、Stable Diffusion探索AI出图与漫剧画面生成，并用Photoshop后期精修。注重审美与交付规范，学习能力强，希望在AIGC视觉 / 平面方向持续积累。",
     "internships": [
       {
-        "period": "2025.01 - 2025.03",
-        "company": "山西元未来数字艺术",
-        "position": "设计师助理",
-        "description": "配合设计师完成项目视觉物料产出，熟练运用即梦、Stable Diffusion、Seedance等AI工具，依据设计需求编写结构化提示词，批量生成插画、IP形象与宣传素材。使用PS对AI生成素材进行抠图、调色与细节精修，输出可使用的设计文件。"
-      },
-      {
-        "period": "2025.05 - 2025.07",
-        "company": "山西万象星禾传媒",
-        "position": "AI素材创作实习生",
-        "description": "协同团队参与AIGC视觉素材项目，完成IP插画、表情包素材产出与数字资产归档整理。熟悉AIGC内容生产链路，运用Adobe Photoshop，结合Midjourney、Stable Diffusion开展素材生成、画面缺陷修复与风格统一。"
-      },
-      {
         "period": "2025.11 - 2026.01",
-        "company": "山西亦晟时代网络传媒",
-        "position": "AIGC视觉实习生",
-        "description": "负责漫剧项目的AIGC视觉开发，依据剧本完成角色与场景的AI生成及分镜预演。熟练运用即梦、Kling等视频模型产出动态素材，结合ComfyUI实现关键帧控制与姿态干预。"
+        "company": "米耶乐（杭州）科技有限责任公司",
+        "position": "视觉设计实习生",
+        "description": "汇报与宣传：承担公司内部汇报、对外宣传PPT的视觉美化，根据内容梳理配色体系、字体层级与图文对齐规范，统一不同文稿的版式语言，提升文稿的可读性与专业观感。文稿排版：承担公司新闻、通知等正式文稿的平面排版与配图制作，规范标题层级、正文段落与插图版式，使版面整洁、重点突出。新媒体排版：负责公众号推文的网页排版及封面、配图制作，结合栏目定位维护统一风格，配合内容节奏保障推文按期发布。"
       }
     ]
   },
@@ -72,44 +60,24 @@
       "icon": "Ai"
     },
     {
-      "name": "After Effects",
-      "icon": "Ae"
+      "name": "PowerPoint",
+      "icon": "PPT"
     },
     {
-      "name": "Premiere Pro",
-      "icon": "Pr"
+      "name": "WPS",
+      "icon": "WPS"
     },
     {
       "name": "即梦",
       "icon": "即梦"
     },
     {
-      "name": "Stable Diffusion",
-      "icon": "SD"
-    },
-    {
-      "name": "Seedance",
-      "icon": "Sd"
-    },
-    {
       "name": "Midjourney",
       "icon": "Mj"
     },
     {
-      "name": "Kling",
-      "icon": "Kl"
-    },
-    {
-      "name": "Runway",
-      "icon": "Rw"
-    },
-    {
-      "name": "ComfyUI",
-      "icon": "Cu"
-    },
-    {
-      "name": "Figma",
-      "icon": "Fg"
+      "name": "Stable Diffusion",
+      "icon": "SD"
     }
   ],
   "projects": [
